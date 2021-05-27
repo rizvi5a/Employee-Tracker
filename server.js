@@ -54,7 +54,7 @@ const runSearch = () => {
           break;
 
         case 'Update-employee-by-manager':
-          updateEmployManager();
+          updateEmployeeByManager();
           break;
 
         case 'Delete-employee':
@@ -198,3 +198,55 @@ const updateEmployeeRole= () => {
 })
 } 
  
+// Each Dept Total Bufget
+const viewTotalDeptBudget= () => {
+
+  inquirer
+  .prompt({
+   name: 'Employees',
+    type: 'input',
+    message: 'View Department Budgets',
+  })
+  .then((answer) => {
+    const query=' select d.id, d.name,sum(r.salary) from department d, role r where d.id= r.department_id group by r.department_id;'
+    //const query = 'select e.first_name,e.last_name,e.role_id, r.title,r.salary from employee e, role r where e.role_id = r.id;'
+    connection.query(query,  (err, res) => {
+      
+        if (err) throw error;
+       
+
+        console.table(res)
+        runSearch();
+
+  });
+ 
+})
+
+};
+
+// Employees grouped by manger_id =1
+const updateEmployeeByManager = () => {
+
+  inquirer
+  .prompt({
+   name: 'Employees',
+    type: 'input',
+    message: 'View Department Budgets',
+  })
+  .then((answer) => {
+    const query=' select first_name,last_name, manager_id from employee where manager_id=1;'
+    
+    connection.query(query,  (err, res) => {
+      
+        if (err) throw error;
+       
+
+        console.table(res)
+        runSearch();
+
+  });
+ 
+})
+
+};
+

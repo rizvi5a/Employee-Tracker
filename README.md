@@ -8,3 +8,5 @@
 #  List all employees
 #  Add an employee
 # Delete an employee
+# Group employees by manager
+# Estimate department budget
