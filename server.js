@@ -83,7 +83,8 @@ const runSearch = () => {
     message: 'View all Employees ',
   })
   .then((answer) => {
-    const query = 'SELECT * FROM employees.employee';
+   // const query = 'SELECT * FROM employees.employee';
+    const query = 'select e.first_name,e.last_name,e.role_id, r.title,r.salary from employee e, role r where e.role_id = r.id;'
     connection.query(query,  (err, res) => {
       
         if (err) throw error;
