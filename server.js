@@ -133,9 +133,9 @@ const runSearch = () => {
      last_name: answers.last_name,
      role_id: answers.role_id,
      manager_id: answers.manager_id
-      }, function (error) {
+      }, function (error,res) {
           if (error) throw error;
-          console.log("added employee");
+          console.table("A New Employee is added");
           runSearch();
       })
   })
@@ -160,9 +160,9 @@ const deleteEmployee= () => {
         
  id: answers.id
  
-  }, function (error) {
+  }, function (error,res) {
       if (error) throw error;
-      console.log("Deleted employee WHERE ?" );
+      console.log("Employee is Deleted" );
       runSearch();
   })
 })
@@ -215,7 +215,7 @@ const viewTotalDeptBudget= () => {
         if (err) throw error;
        
 
-        console.table(res)
+        console.table(res )
         runSearch();
 
   });
@@ -231,7 +231,7 @@ const updateEmployeeByManager = () => {
   .prompt({
    name: 'Employees',
     type: 'input',
-    message: 'View Department Budgets',
+    message: 'View Employees Grouped by Manager',
   })
   .then((answer) => {
     const query=' select first_name,last_name, manager_id from employee where manager_id=1;'
