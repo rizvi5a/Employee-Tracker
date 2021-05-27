@@ -33,8 +33,8 @@ const runSearch = () => {
         'Update-employee-role',
         'Update-employee-by-manager',
         'Delete-employee',
-        'View-total-department-budget'
-        
+        'View-total-department-budget',
+         'Exit Application'
       ]
     })
     .then((answer) => {
@@ -65,7 +65,8 @@ const runSearch = () => {
           break;
 
         default:
-          console.log(`Invalid action: ${answer.action}`);
+          console.log(`${answer.action} - See you next time`);
+          process.exit(0)
           break;
          
       }
@@ -186,12 +187,8 @@ const updateEmployeeRole= () => {
 ])
 .then((answers) => {
   console.log(answers);
-  connection.query ("UPDATE employees.employee  ?  ",
-  {
-   
-     role_id:answers.role_id,
-     id: answers.id
-  },
+  connection.query ("UPDATE employees.employee  set role_id = ? where id = ?  ",
+  [answers.role_id,answers.id],
        function (error) {
       if (error) throw error;
       console.log("Employee Role is updated" );
